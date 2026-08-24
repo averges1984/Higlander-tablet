@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#08131d">
+<title>Highlander Passenger Portal</title>
+<style>
+:root{
+  --bg:#08131d; --panel:rgba(8,19,29,.84); --panel2:rgba(17,31,45,.86);
+  --text:#f7fbff; --muted:#a9bac8; --teal:#2ad3d0; --gold:#f1b54a;
+  --blue:#48a3ff; --line:rgba(255,255,255,.12); --shadow:0 18px 50px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:#07111a;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Arial,sans-serif}
+body{
+  background:
+    radial-gradient(circle at 20% 10%, rgba(27,143,183,.18), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(255,132,56,.16), transparent 30%),
+    linear-gradient(180deg,#07111a 0%,#0a1c2b 58%,#07111a 100%);
+  overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;
+  background:
+    linear-gradient(180deg,transparent 0 61%,rgba(0,0,0,.35) 61% 62%,transparent 62%),
+    radial-gradient(ellipse at 50% 44%,transparent 0 36%,rgba(0,0,0,.25) 75%);
+}
+.app{max-width:1365px;margin:auto;padding:24px 24px 30px}
+.topbar{display:flex;justify-content:space-between;align-items:center;color:#dce9f0;font-size:18px;margin-bottom:10px}
+.status{display:flex;gap:18px;align-items:center}
+.hero{
+  position:relative;border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:var(--shadow);
+  min-height:285px;padding:26px 30px;background:
+  linear-gradient(90deg,rgba(5,14,22,.95) 0%,rgba(5,14,22,.78) 38%,rgba(5,14,22,.20) 68%,rgba(5,14,22,.72) 100%),
+  linear-gradient(180deg,#1d3557 0%,#7c4b45 48%,#122634 100%);
+}
+.hero:after{
+ content:"";position:absolute;inset:auto 0 0 0;height:46%;
+ background:
+   radial-gradient(ellipse at 25% 100%,rgba(0,0,0,.65) 0 10%,transparent 11%),
+   repeating-linear-gradient(90deg,transparent 0 44px,rgba(255,255,255,.06) 45px 47px),
+   linear-gradient(180deg,transparent,rgba(0,0,0,.52));
+ opacity:.9;pointer-events:none
+}
+.skyline{position:absolute;left:0;right:0;bottom:0;height:42%;opacity:.95;z-index:0}
+.skyline span{position:absolute;bottom:0;background:#08121c;border-top:2px solid rgba(255,195,126,.24)}
+.brand{position:relative;z-index:2;max-width:630px}
+.eyebrow{font-size:17px;color:var(--teal);letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+h1{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-weight:500;font-size:72px;line-height:.92;margin:7px 0 12px}
+.sub{font-size:24px;letter-spacing:.18em;color:#dbeaf3;text-transform:uppercase}
+.thanks{font-size:17px;color:#dce5ec;margin-top:14px;letter-spacing:.08em}
+.vehicle{
+ position:absolute;right:28px;bottom:18px;z-index:2;width:47%;min-width:490px;max-width:650px;
+ border-radius:30px;padding:20px 22px;background:linear-gradient(135deg,rgba(12,22,31,.36),rgba(12,22,31,.03));
+}
+.car-art{height:150px;position:relative;filter:drop-shadow(0 18px 18px rgba(0,0,0,.45))}
+.car-body{position:absolute;left:10%;right:6%;bottom:34px;height:66px;border-radius:55px 70px 28px 30px;background:linear-gradient(180deg,#5f6670,#303740 58%,#1c232b);border:2px solid rgba(255,255,255,.2)}
+.car-roof{position:absolute;left:28%;right:24%;bottom:82px;height:55px;clip-path:polygon(20% 0,78% 0,100% 100%,0 100%);background:linear-gradient(180deg,#505863,#242b33);border-top:2px solid rgba(255,255,255,.2)}
+.window{position:absolute;background:linear-gradient(180deg,#0a1720,#173143);border:1px solid rgba(255,255,255,.16)}
+.w1{left:34%;bottom:92px;width:112px;height:35px;clip-path:polygon(14% 0,100% 0,92% 100%,0 100%)}
+.w2{left:52%;bottom:92px;width:105px;height:35px;clip-path:polygon(0 0,82% 0,100% 100%,8% 100%)}
+.wheel{position:absolute;bottom:13px;width:68px;height:68px;border-radius:50%;background:radial-gradient(circle,#cfd5da 0 9%,#323940 10% 22%,#b7bec4 23% 30%,#272e35 31% 55%,#090d11 56%);border:4px solid #080b0d}
+.wl{left:22%}.wr{right:14%}
+.car-label{display:flex;justify-content:space-between;align-items:end;margin-top:-6px}
+.car-label strong{font-size:28px;letter-spacing:.03em}.car-label small{display:block;color:var(--teal);font-size:17px;letter-spacing:.13em;margin-top:2px}
+.pill{background:rgba(8,19,29,.72);border:1px solid var(--line);border-radius:18px;padding:12px 14px;font-size:14px;color:#dce8ef}
+.grid{display:grid;grid-template-columns:repeat(9,1fr);gap:12px;margin-top:16px}
+.tile{
+ border:1px solid var(--line);background:linear-gradient(180deg,rgba(18,31,43,.92),rgba(8,18,27,.92));
+ border-radius:20px;min-height:132px;padding:16px 10px 13px;text-align:center;color:white;text-decoration:none;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.18);
+ transition:.15s transform,.15s background
+}
+.tile:active{transform:scale(.97);background:rgba(255,255,255,.09)}
+.icon{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;font-size:34px;margin-bottom:9px;background:rgba(255,255,255,.07)}
+.tile b{font-size:17px}.tile span{font-size:12px;color:var(--muted);margin-top:4px}
+.info-row{display:grid;grid-template-columns:1.1fr 1fr 1fr 1.2fr 1.2fr;gap:0;margin-top:14px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:rgba(7,17,26,.85)}
+.info{padding:15px 18px;border-right:1px solid var(--line);min-height:88px}.info:last-child{border-right:0}
+.info .k{color:var(--teal);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.04em}.info .v{font-size:14px;line-height:1.45;color:#e6eef3;margin-top:5px}
+.cards{display:grid;grid-template-columns:1.05fr 1.05fr .9fr;gap:14px;margin-top:14px}
+.card{
+  border:1px solid var(--line);border-radius:22px;padding:22px;min-height:172px;background:linear-gradient(135deg,rgba(18,31,43,.96),rgba(8,18,27,.96));
+  box-shadow:0 12px 32px rgba(0,0,0,.2);position:relative;overflow:hidden
+}
+.card:after{content:"";position:absolute;inset:auto -35px -65px auto;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(42,211,208,.16),transparent 67%)}
+.card h3{font-size:29px;margin:0 0 6px}.card p{font-size:17px;line-height:1.45;color:#dce7ee;margin:4px 0}
+.card .cta{display:inline-flex;margin-top:12px;padding:11px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.17);color:white;text-decoration:none;font-weight:700;letter-spacing:.03em}
+.card.real h3{color:var(--teal)}.card.ride h3{color:var(--gold)}.card.driver h3{color:var(--blue)}
+.footer{text-align:center;color:#b9c9d3;letter-spacing:.22em;text-transform:uppercase;font-size:13px;margin:16px 0 2px}
+.page{display:none}.page.active{display:block}
+.subpage{max-width:920px;margin:20px auto 0}
+.back{display:inline-flex;align-items:center;gap:8px;color:#d9e7ee;text-decoration:none;font-weight:700;margin-bottom:16px}
+.subhero{border:1px solid var(--line);border-radius:26px;padding:28px;background:linear-gradient(135deg,rgba(20,37,51,.96),rgba(8,18,27,.96));box-shadow:var(--shadow)}
+.subhero h2{font-size:44px;margin:0 0 8px}.subhero p{font-size:18px;line-height:1.5;color:#d6e1e8}
+.action-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+.action{border:1px solid var(--line);border-radius:20px;padding:20px;background:rgba(12,24,35,.92);text-decoration:none;color:white}
+.action h4{font-size:22px;margin:0 0 7px}.action p{color:#b8c7d1;margin:0;line-height:1.45}
+.notice{margin-top:16px;padding:15px 18px;border-radius:16px;background:rgba(241,181,74,.08);border:1px solid rgba(241,181,74,.24);color:#e7dbc3}
+#settingsHint{font-size:12px;color:#8ea0ac;margin-top:12px}
+@media(max-width:1000px){
+ .grid{grid-template-columns:repeat(5,1fr)}
+ .info-row{grid-template-columns:1fr 1fr}.info{border-bottom:1px solid var(--line)}
+ .cards{grid-template-columns:1fr}.vehicle{opacity:.38;right:-95px}.brand{max-width:70%}
+}
+@media(max-width:680px){
+ .app{padding:14px}.hero{padding:20px;min-height:260px}.vehicle{display:none}.brand{max-width:100%}
+ h1{font-size:54px}.sub{font-size:17px}.grid{grid-template-columns:repeat(3,1fr)}
+ .info-row{grid-template-columns:1fr}.info{border-right:0}.action-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div>iPad • Passenger Mode</div>
+    <div class="status"><span id="clock">10:30 PM</span><span>🔋 100%</span></div>
+  </div>
+
+  <section id="home" class="page active">
+    <div class="hero">
+      <div class="skyline" aria-hidden="true">
+        <span style="left:3%;width:32px;height:52%"></span><span style="left:7%;width:25px;height:38%"></span><span style="left:11%;width:42px;height:65%"></span>
+        <span style="left:16%;width:22px;height:46%"></span><span style="left:20%;width:36px;height:71%"></span><span style="left:26%;width:26px;height:49%"></span>
+        <span style="left:31%;width:46px;height:59%"></span><span style="left:37%;width:26px;height:42%"></span><span style="left:41%;width:32px;height:69%"></span>
+      </div>
+      <div class="brand">
+        <div class="eyebrow">South Florida Passenger Experience</div>
+        <h1>Welcome!</h1>
+        <div class="sub">Enjoy your ride</div>
+        <div class="thanks">♥ Thank you for riding with me</div>
+        <div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap">
+          <div class="pill">📶 Wi‑Fi: <b id="wifiName">UberXL-Highlander</b></div>
+          <div class="pill">🌤️ Miami, FL</div>
+          <div class="pill">🚙 Highlander Hybrid 2022</div>
+        </div>
+      </div>
+      <div class="vehicle">
+        <img src="highlander_2022.png" alt="Dark gray 2022 Toyota Highlander Hybrid" style="width:100%;height:170px;object-fit:cover;object-position:center;border-radius:22px;border:1px solid rgba(255,255,255,.16);box-shadow:0 16px 32px rgba(0,0,0,.35)">
+        <div class="car-label" style="margin-top:10px">
+          <div><strong>HIGHLANDER</strong><small>2022 HYBRID • DARK GRAY</small></div>
+          <div class="pill">XL • Comfortable • Clean</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid" id="apps"></div>
+
+    <div class="info-row">
+      <div class="info"><div class="k">Free Wi‑Fi</div><div class="v">Network: <b id="wifiName2">UberXL-Highlander</b><br>Password: <b id="wifiPass">enjoytheride</b></div></div>
+      <div class="info"><div class="k">Today in Miami</div><div class="v">Tap Weather for the latest local forecast.</div></div>
+      <div class="info"><div class="k">Flight Info</div><div class="v">Check arrivals, departures and flight status.</div></div>
+      <div class="info"><div class="k">Local Guide</div><div class="v">Restaurants, attractions & things to do.</div></div>
+      <div class="info"><div class="k">Tips Appreciated!</div><div class="v">Tips are available in the <b>Uber or Lyft app</b>. Thank you!</div></div>
+    </div>
+
+    <div class="cards">
+      <div class="card real">
+        <h3>Moving to South Florida?</h3>
+        <p>Ask me about homes & rentals.</p>
+        <a class="cta" href="#realestate" onclick="showPage('realestate')">REAL ESTATE SERVICES →</a>
+      </div>
+      <div class="card ride">
+        <h3>Need a ride later?</h3>
+        <p>Airport • Long Distance • Hourly</p>
+        <p>Ask about my private transportation service.</p>
+        <a class="cta" href="#rides" onclick="showPage('rides')">PRIVATE TRANSPORTATION →</a>
+      </div>
+      <div class="card driver">
+        <h3>Your Driver</h3>
+        <p>Professional • Local • Reliable</p>
+        <p>Thank you for riding!</p>
+        <a class="cta" href="#contact" onclick="showPage('contact')">CONTACT / SAVE INFO →</a>
+      </div>
+    </div>
+    <div class="footer">♥ Please buckle up & enjoy your ride! ♥</div>
+  </section>
+
+  <section id="realestate" class="page subpage">
+    <a class="back" href="#home" onclick="showPage('home')">← Back to Home</a>
+    <div class="subhero">
+      <div class="eyebrow">Real Estate Services</div>
+      <h2>Moving to South Florida?</h2>
+      <p>Looking to buy or rent? I can help you explore homes, rentals and neighborhoods across South Florida.</p>
+      <div class="action-grid">
+        <a class="action" id="homesLink" href="#"><h4>🏡 Homes for Sale</h4><p>Open my home-search page on your phone or browser.</p></a>
+        <a class="action" id="rentalsLink" href="#"><h4>🔑 Rentals</h4><p>See rental options and ask about availability.</p></a>
+        <a class="action" id="reText" href="#"><h4>💬 Text Me</h4><p>Send a quick message about buying or renting.</p></a>
+        <a class="action" id="reWhats" href="#"><h4>📲 WhatsApp</h4><p>Continue the conversation from your own phone.</p></a>
+      </div>
+      <div class="notice">For privacy, passengers should contact you from their own phone. This iPad does not display your message history.</div>
+    </div>
+  </section>
+
+  <section id="rides" class="page subpage">
+    <a class="back" href="#home" onclick="showPage('home')">← Back to Home</a>
+    <div class="subhero">
+      <div class="eyebrow">Private Transportation</div>
+      <h2>Need a ride later?</h2>
+      <p>Airport transportation, long-distance rides and hourly service — subject to availability.</p>
+      <div class="action-grid">
+        <a class="action" id="airportText" href="#"><h4>✈️ Airport Ride</h4><p>Request a future airport pickup or drop-off.</p></a>
+        <a class="action" id="longText" href="#"><h4>🚙 Long Distance</h4><p>Ask about a private ride outside your local area.</p></a>
+        <a class="action" id="hourlyText" href="#"><h4>🕐 Hourly Driver</h4><p>Ask about reserving the vehicle by the hour.</p></a>
+        <a class="action" id="saveContact" href="#"><h4>👤 Save My Contact</h4><p>Save the driver's information to your phone.</p></a>
+      </div>
+      <div class="notice">Private transportation is separate from your current Uber/Lyft trip. Availability and pricing are confirmed directly with the driver.</div>
+    </div>
+  </section>
+
+  <section id="contact" class="page subpage">
+    <a class="back" href="#home" onclick="showPage('home')">← Back to Home</a>
+    <div class="subhero">
+      <div class="eyebrow">Your Driver</div>
+      <h2 id="driverName">Your Driver</h2>
+      <p>Professional • Local • Reliable</p>
+      <div class="action-grid">
+        <a class="action" id="contactText" href="#"><h4>💬 Text</h4><p>Send a message from your phone.</p></a>
+        <a class="action" id="contactCall" href="#"><h4>📞 Call</h4><p>Call the driver.</p></a>
+        <a class="action" id="contactWhats" href="#"><h4>📲 WhatsApp</h4><p>Open WhatsApp.</p></a>
+        <a class="action" id="contactCard" href="#"><h4>👤 Save Contact</h4><p>Download a contact card.</p></a>
+      </div>
+      <div id="settingsHint">Driver details are placeholders until you add your phone, WhatsApp, and real-estate links in the CONFIG section of this file.</div>
+    </div>
+  </section>
+</div>
+
+<script>
+const CONFIG = {
+  driverName: "Your Driver",
+  phone: "+19540000000",              // replace with your number
+  whatsapp: "19540000000",            // digits only, country code included
+  realtorHomesUrl: "https://www.google.com/search?q=homes+for+sale+south+florida",
+  realtorRentalsUrl: "https://www.google.com/search?q=rentals+south+florida",
+  wifiName: "UberXL-Highlander",
+  wifiPassword: "enjoytheride"
+};
+
+const apps = [
+  {name:"YouTube", sub:"Videos & Music", icon:"▶️", url:"https://www.youtube.com/"},
+  {name:"YouTube Kids", sub:"For Kids", icon:"🧒", url:"https://www.youtubekids.com/"},
+  {name:"Spotify", sub:"Music", icon:"🎵", url:"https://open.spotify.com/"},
+  {name:"Games", sub:"Play & Enjoy", icon:"🎮", url:"https://www.crazygames.com/"},
+  {name:"PBS KIDS Games", sub:"Fun & Educational", icon:"🟢", url:"https://pbskids.org/games/"},
+  {name:"Sudoku", sub:"Brain Games", icon:"🔢", url:"https://sudoku.com/"},
+  {name:"Google Maps", sub:"Explore Places", icon:"📍", url:"https://maps.google.com/"},
+  {name:"Weather", sub:"Local Forecast", icon:"🌤️", url:"https://weather.com/weather/today/l/Miami+FL"},
+  {name:"FlightAware", sub:"Flight Status", icon:"✈️", url:"https://www.flightaware.com/"}
+];
+
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function sms(text){ return `sms:${CONFIG.phone}?&body=${encodeURIComponent(text)}`; }
+function wa(text){ return `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`; }
+
+document.getElementById("apps").innerHTML = apps.map(a =>
+  `<a class="tile" href="${a.url}" target="_blank" rel="noopener">
+     <div class="icon">${a.icon}</div><b>${a.name}</b><span>${a.sub}</span>
+   </a>`).join("");
+
+document.getElementById("driverName").textContent = CONFIG.driverName;
+document.getElementById("wifiName").textContent = CONFIG.wifiName;
+document.getElementById("wifiName2").textContent = CONFIG.wifiName;
+document.getElementById("wifiPass").textContent = CONFIG.wifiPassword;
+
+document.getElementById("homesLink").href = CONFIG.realtorHomesUrl;
+document.getElementById("rentalsLink").href = CONFIG.realtorRentalsUrl;
+document.getElementById("reText").href = sms("Hi! I saw your South Florida real-estate information during my ride. I’m interested in buying or renting.");
+document.getElementById("reWhats").href = wa("Hi! I saw your South Florida real-estate information during my ride. I’m interested in buying or renting.");
+
+document.getElementById("airportText").href = sms("Hi! I’d like to ask about a future private airport ride.");
+document.getElementById("longText").href = sms("Hi! I’d like to ask about a private long-distance ride.");
+document.getElementById("hourlyText").href = sms("Hi! I’d like to ask about hourly private transportation.");
+document.getElementById("saveContact").href = "#contact";
+document.getElementById("saveContact").onclick = ()=>showPage("contact");
+
+document.getElementById("contactText").href = sms("Hi! I saved your information from my ride.");
+document.getElementById("contactCall").href = `tel:${CONFIG.phone}`;
+document.getElementById("contactWhats").href = wa("Hi! I saved your information from my ride.");
+
+const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:${CONFIG.driverName}
+TEL;TYPE=CELL:${CONFIG.phone}
+NOTE:Private transportation and South Florida real estate contact
+END:VCARD`;
+document.getElementById("contactCard").href = "data:text/vcard;charset=utf-8," + encodeURIComponent(vcard);
+document.getElementById("contactCard").download = "driver-contact.vcf";
+
+function updateClock(){
+  const d=new Date();
+  document.getElementById("clock").textContent=d.toLocaleTimeString([], {hour:"numeric",minute:"2-digit"});
+}
+updateClock(); setInterval(updateClock,30000);
+
+window.addEventListener("hashchange",()=> {
+  const id=location.hash.replace("#","");
+  if(["home","realestate","rides","contact"].includes(id)) showPage(id);
+});
+</script>
+</body>
+</html>
