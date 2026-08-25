@@ -1,8 +1,13 @@
-LARGER INTERACTIVE VERSION
+HIGHLANDER PASSENGER PORTAL — FINAL IPAD VERSION
 
-Upload to the ROOT of GitHub:
+Upload these 3 files to the ROOT of your GitHub repository:
 - index.html
-- dashboard.png
+- dashboard_final.png
+- realtor_card.jpg
 
-This version keeps the same design and clickable buttons, but makes the dashboard
-slightly larger on landscape phones and iPads.
+Optimized to scale to iPad landscape without scrolling.
+Interactive:
+- YouTube / YouTube Kids / Spotify / Games / PBS KIDS / Relax Audio
+- Real Estate Services opens Alberto's business card
+- Need a ride later opens a message only (no phone number)
+- Tips opens Uber/Lyft tipping guidance

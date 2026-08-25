@@ -5,100 +5,139 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#00131c">
 <title>Highlander Passenger Portal</title>
 <style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{
   margin:0;width:100%;height:100%;overflow:hidden;background:#00131c;
   font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Arial,sans-serif;
 }
-#stage{position:fixed;left:50%;top:50%;width:1536px;height:1024px;transform-origin:center center}
-#dash{position:absolute;inset:0;width:100%;height:100%;display:block;user-select:none;-webkit-user-drag:none}
+#stage{
+  position:fixed;left:50%;top:50%;
+  width:1672px;height:941px;
+  transform-origin:center center;
+}
+#dashboard{
+  position:absolute;inset:0;width:100%;height:100%;
+  display:block;user-select:none;-webkit-user-drag:none;
+}
 .hotspot{
-  position:absolute;display:block;border-radius:18px;text-decoration:none;cursor:pointer;
-  background:rgba(255,255,255,0)
+  position:absolute;display:block;text-decoration:none;border-radius:18px;
+  background:rgba(255,255,255,0);cursor:pointer;
 }
 .hotspot:active{background:rgba(255,255,255,.08)}
+
+/* Modal overlays */
 .modal{
-  display:none;position:absolute;inset:0;background:rgba(3,10,16,.92);z-index:20;
-  align-items:center;justify-content:center;padding:8%
+  display:none;position:absolute;inset:0;z-index:50;
+  background:rgba(0,10,16,.92);align-items:center;justify-content:center;
+  padding:5%;
 }
 .modal.active{display:flex}
 .panel{
-  width:78%;max-width:900px;background:linear-gradient(135deg,#0b1c28,#07131c);
-  border:1px solid rgba(255,255,255,.16);border-radius:26px;padding:28px;color:white;
-  box-shadow:0 30px 70px rgba(0,0,0,.45)
+  width:78%;max-width:1000px;max-height:84%;
+  background:linear-gradient(135deg,#0b1c28,#07131c);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:28px;padding:28px;color:white;
+  box-shadow:0 30px 80px rgba(0,0,0,.55);
+  overflow:auto;
 }
-.panel h2{margin:0 0 8px;font-size:38px}
-.panel p{color:#d8e3e9;font-size:18px;line-height:1.5}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
-.action{
-  display:block;padding:18px;border:1px solid rgba(255,255,255,.15);border-radius:18px;
-  background:#0d2230;color:white;text-decoration:none;font-weight:700
+.close{
+  position:absolute;right:7%;top:7%;
+  width:52px;height:52px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.25);
+  background:#0c2230;color:white;font-size:30px;
+  display:grid;place-items:center;text-decoration:none;z-index:60;
 }
-.action small{display:block;color:#aebdca;margin-top:4px;font-weight:400}
-.close{display:inline-block;margin-bottom:14px;color:#2adbd5;text-decoration:none;font-weight:800}
+.card-wrap{
+  display:flex;align-items:center;justify-content:center;
+  min-height:100%;
+}
+.card-wrap img{
+  max-width:92%;max-height:72vh;border-radius:18px;
+  box-shadow:0 18px 48px rgba(0,0,0,.45)
+}
+.ride-panel h2,.tip-panel h2{margin:0 0 12px;font-size:42px}
+.ride-panel p,.tip-panel p{font-size:21px;line-height:1.5;color:#d8e4ea}
+.tagline{
+  color:#f4a62a;font-size:26px;font-weight:800;margin-top:18px
+}
+.small-note{font-size:15px;color:#9fb1bc;margin-top:14px}
+
+/* Better full-screen fit for iPad and iPhone landscape */
+@media (orientation:portrait){
+  body:before{
+    content:"Rotate device for best view";
+    position:fixed;left:50%;top:18px;transform:translateX(-50%);
+    color:#b8c8d2;font-size:14px;z-index:100;
+  }
+}
 </style>
 </head>
 <body>
 <div id="stage">
-  <img id="dash" src="dashboard.png" alt="Highlander Passenger Portal">
+  <img id="dashboard" src="dashboard_final.png" alt="Highlander Passenger Portal">
 
-  <a class="hotspot" style="left:1.3%;top:48.4%;width:15.6%;height:18%" href="https://www.youtube.com/" target="_blank" aria-label="YouTube"></a>
-  <a class="hotspot" style="left:17.6%;top:48.4%;width:15.6%;height:18%" href="https://www.youtubekids.com/" target="_blank" aria-label="YouTube Kids"></a>
-  <a class="hotspot" style="left:34.0%;top:48.4%;width:15.5%;height:18%" href="https://open.spotify.com/" target="_blank" aria-label="Spotify"></a>
-  <a class="hotspot" style="left:50.3%;top:48.4%;width:15.5%;height:18%" href="https://www.crazygames.com/" target="_blank" aria-label="Games"></a>
-  <a class="hotspot" style="left:66.8%;top:48.4%;width:15.5%;height:18%" href="https://pbskids.org/games/" target="_blank" aria-label="PBS Kids Games"></a>
-  <a class="hotspot" style="left:83.1%;top:48.4%;width:15.5%;height:18%" href="https://www.youtube.com/results?search_query=relaxing+music" target="_blank" aria-label="Relax Audio"></a>
+  <!-- App tiles: 6 visible cards -->
+  <a class="hotspot" style="left:1.5%;top:42.0%;width:15.0%;height:18.8%" href="https://www.youtube.com/" target="_blank" aria-label="YouTube"></a>
+  <a class="hotspot" style="left:17.3%;top:42.0%;width:15.0%;height:18.8%" href="https://www.youtubekids.com/" target="_blank" aria-label="YouTube Kids"></a>
+  <a class="hotspot" style="left:33.1%;top:42.0%;width:15.0%;height:18.8%" href="https://open.spotify.com/" target="_blank" aria-label="Spotify"></a>
+  <a class="hotspot" style="left:48.9%;top:42.0%;width:15.0%;height:18.8%" href="https://www.crazygames.com/" target="_blank" aria-label="Games"></a>
+  <a class="hotspot" style="left:64.7%;top:42.0%;width:15.0%;height:18.8%" href="https://pbskids.org/games/" target="_blank" aria-label="PBS KIDS Games"></a>
+  <a class="hotspot" style="left:80.5%;top:42.0%;width:17.8%;height:18.8%" href="https://www.youtube.com/results?search_query=relaxing+music" target="_blank" aria-label="Relax Audio"></a>
 
-  <a class="hotspot" style="left:1.3%;top:68.6%;width:31.8%;height:28%" href="#" onclick="openModal('realestate');return false" aria-label="Moving to South Florida"></a>
-  <a class="hotspot" style="left:34.0%;top:68.6%;width:31.8%;height:28%" href="#" onclick="openModal('rides');return false" aria-label="Need a ride later"></a>
-  <a class="hotspot" style="left:66.8%;top:68.6%;width:31.8%;height:28%" href="#" onclick="openModal('tips');return false" aria-label="Tips appreciated"></a>
+  <!-- Bottom service cards -->
+  <a class="hotspot" style="left:1.4%;top:62.7%;width:32.0%;height:34.2%" href="#" onclick="openModal('realestate');return false" aria-label="Real Estate Services"></a>
+  <a class="hotspot" style="left:34.1%;top:62.7%;width:31.8%;height:34.2%" href="#" onclick="openModal('rides');return false" aria-label="Need a ride later"></a>
+  <a class="hotspot" style="left:66.7%;top:62.7%;width:31.8%;height:34.2%" href="#" onclick="openModal('tips');return false" aria-label="Tips appreciated"></a>
 
+  <!-- Real estate card -->
   <div id="realestate" class="modal">
-    <div class="panel">
-      <a class="close" href="#" onclick="closeModals();return false">← Back</a>
-      <h2>Moving to South Florida?</h2>
-      <p>This button is now functional. When you give me your real Realtor link and contact method, I can connect it directly to your page.</p>
-      <div class="actions">
-        <a class="action" href="https://www.google.com/search?q=homes+for+sale+south+florida" target="_blank">🏡 Homes for Sale<small>Browse South Florida homes</small></a>
-        <a class="action" href="https://www.google.com/search?q=rentals+south+florida" target="_blank">🔑 Rentals<small>Browse South Florida rentals</small></a>
-      </div>
+    <a class="close" href="#" onclick="closeModals();return false">×</a>
+    <div class="panel card-wrap">
+      <img src="realtor_card.jpg" alt="Alberto Verges Real Estate Agent business card">
     </div>
   </div>
 
+  <!-- Ride later: intentionally no phone number -->
   <div id="rides" class="modal">
-    <div class="panel">
-      <a class="close" href="#" onclick="closeModals();return false">← Back</a>
+    <a class="close" href="#" onclick="closeModals();return false">×</a>
+    <div class="panel ride-panel">
       <h2>Need a ride later?</h2>
-      <p>Airport • Long Distance • Hourly. Once you give me your real phone or WhatsApp, I can make these contact buttons go straight to you.</p>
-      <div class="actions">
-        <a class="action" href="https://www.google.com/maps" target="_blank">✈️ Airport Ride<small>Open Maps</small></a>
-        <a class="action" href="https://www.google.com/maps" target="_blank">🚙 Long Distance<small>Open Maps</small></a>
-      </div>
+      <p>Airport • Long Distance • Hourly</p>
+      <div class="tagline">Feel free to ask me!</div>
+      <p class="small-note">Please ask your driver directly for availability and details.</p>
     </div>
   </div>
 
+  <!-- Tips -->
   <div id="tips" class="modal">
-    <div class="panel">
-      <a class="close" href="#" onclick="closeModals();return false">← Back</a>
+    <a class="close" href="#" onclick="closeModals();return false">×</a>
+    <div class="panel tip-panel">
       <h2>Tips are appreciated!</h2>
-      <p>For Uber or Lyft rides, passengers can leave a tip directly in the Uber or Lyft app.</p>
+      <p>Tips can be left directly in the Uber or Lyft app. Thank you!</p>
     </div>
   </div>
 </div>
 
 <script>
 function fit(){
-  const base=Math.min(innerWidth/1536, innerHeight/1024);
-  const isWidePhone = innerWidth / innerHeight > 1.75;
-  const boost = isWidePhone ? 1.08 : 1.04;
-  const scale=base*boost;
-  document.getElementById('stage').style.transform=`translate(-50%,-50%) scale(${scale})`;
+  const safeW = window.innerWidth;
+  const safeH = window.innerHeight;
+  const scale = Math.min(safeW/1672, safeH/941);
+  const stage = document.getElementById('stage');
+  stage.style.transform = `translate(-50%,-50%) scale(${scale})`;
 }
-function openModal(id){closeModals();document.getElementById(id).classList.add('active')}
-function closeModals(){document.querySelectorAll('.modal').forEach(x=>x.classList.remove('active'))}
-addEventListener('resize',fit);
-addEventListener('orientationchange',()=>setTimeout(fit,200));
+function openModal(id){
+  closeModals();
+  document.getElementById(id).classList.add('active');
+}
+function closeModals(){
+  document.querySelectorAll('.modal').forEach(m=>m.classList.remove('active'));
+}
+window.addEventListener('resize', fit);
+window.addEventListener('orientationchange', ()=>setTimeout(fit,250));
 fit();
 </script>
 </body>
