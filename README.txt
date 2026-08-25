@@ -1,7 +1,8 @@
-INTERACTIVE VERSION
+LARGER INTERACTIVE VERSION
 
-Upload these two files to the ROOT of your GitHub repository:
+Upload to the ROOT of GitHub:
 - index.html
 - dashboard.png
 
-This keeps the exact visual design and adds invisible clickable areas over the app tiles and bottom cards.
+This version keeps the same design and clickable buttons, but makes the dashboard
+slightly larger on landscape phones and iPads.
