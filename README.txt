@@ -1,11 +1,7 @@
-HIGHLANDER PASSENGER PORTAL
+INTERACTIVE VERSION
 
-Upload BOTH files to the ROOT of your GitHub repository:
+Upload these two files to the ROOT of your GitHub repository:
 - index.html
 - dashboard.png
 
-Important:
-Replace the old index.html and use dashboard.png from this package.
-GitHub Pages should be set to:
-Branch: main
-Folder: /(root)
+This keeps the exact visual design and adds invisible clickable areas over the app tiles and bottom cards.
