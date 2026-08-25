@@ -2,220 +2,33 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#06121b">
 <title>Highlander Passenger Portal</title>
 <style>
-:root{--teal:#2adbd5;--gold:#f4b544;--blue:#4ba8ff;--line:rgba(255,255,255,.15);--muted:#aebdca}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#06121b;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Arial,sans-serif}
-#stage{position:fixed;left:50%;top:50%;width:1366px;height:768px;transform-origin:center center}
-#screen{width:1366px;height:768px;padding:14px 18px;background:
- radial-gradient(circle at 12% 0%,rgba(19,116,142,.18),transparent 30%),
- linear-gradient(180deg,#07141e,#07111a 62%,#050d13)}
-.top{height:28px;display:flex;align-items:center;justify-content:space-between;color:#dce8ef;font-size:16px;padding:0 3px}
-.hero{height:248px;display:grid;grid-template-columns:43% 57%;border:1px solid var(--line);border-radius:24px;overflow:hidden;background:#08131d;box-shadow:0 15px 38px rgba(0,0,0,.34)}
-.heroLeft{padding:22px 28px;background:
- radial-gradient(circle at 84% 10%,rgba(42,219,213,.09),transparent 28%),
- linear-gradient(135deg,#081924,#0a1b27 60%,#08131c)}
-.eyebrow{color:var(--teal);font-size:16px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
-h1{font:italic 500 64px/0.92 Georgia,"Times New Roman",serif;margin:9px 0 10px}
-.sub{font-size:21px;letter-spacing:.18em;text-transform:uppercase}
-.thanks{font-size:16px;margin-top:12px;color:#e7eef3}
-.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-.badge{border:1px solid var(--line);background:rgba(255,255,255,.035);padding:8px 11px;border-radius:14px;font-size:13px}
-.heroRight{position:relative;overflow:hidden;background:#0a141d}
-.heroRight img{width:100%;height:100%;object-fit:cover;object-position:center 45%;display:block}
-.heroRight:after{content:"";position:absolute;inset:auto 0 0 0;height:58px;background:linear-gradient(180deg,transparent,rgba(6,18,27,.96))}
-.carLabel{position:absolute;right:20px;bottom:10px;z-index:2;text-align:right;text-shadow:0 2px 8px #000}
-.carLabel b{font-size:24px}.carLabel span{display:block;color:var(--teal);font-size:12px;letter-spacing:.12em;margin-top:2px}
-
-.apps{height:94px;display:grid;grid-template-columns:repeat(9,1fr);gap:8px;margin-top:10px}
-.app{border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,rgba(17,34,47,.98),rgba(7,17,26,.98));color:#fff;text-decoration:none;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:6px}
-.app:active{transform:scale(.97)}
-.ico{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.07);display:grid;place-items:center;font-size:22px;margin-bottom:5px}
-.app b{font-size:12px;line-height:1.05}.app small{font-size:9px;color:var(--muted);margin-top:3px}
-
-.infoRow{height:62px;display:grid;grid-template-columns:1.15fr 1fr 1fr 1.15fr 1.2fr;margin-top:8px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:rgba(5,15,23,.94)}
-.info{padding:8px 11px;border-right:1px solid var(--line)}
-.info:last-child{border-right:0}.k{color:var(--teal);font-size:10px;font-weight:800;text-transform:uppercase}.v{font-size:10px;line-height:1.35;color:#e4edf2;margin-top:4px}
-
-.cards{height:188px;display:grid;grid-template-columns:1.05fr 1.05fr .9fr;gap:9px;margin-top:8px}
-.card{position:relative;border:1px solid var(--line);border-radius:19px;padding:16px 17px;overflow:hidden}
-.real{background:linear-gradient(135deg,rgba(4,82,88,.78),rgba(5,17,25,.98))}
-.ride{background:linear-gradient(135deg,rgba(91,57,9,.76),rgba(7,15,23,.98))}
-.driver{background:linear-gradient(135deg,rgba(8,55,100,.76),rgba(6,14,22,.98))}
-.card h3{font-size:25px;line-height:1.05;margin:0 0 7px}.real h3{color:var(--teal)}.ride h3{color:var(--gold)}.driver h3{color:var(--blue)}
-.card p{font-size:13px;line-height:1.35;margin:4px 0;color:#e4edf2}
-.cta{position:absolute;left:17px;bottom:14px;padding:8px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.2);color:white;text-decoration:none;font-size:11px;font-weight:800}
-.footer{height:20px;display:flex;align-items:end;justify-content:center;color:#b9c8d2;font-size:9px;letter-spacing:.18em;text-transform:uppercase}
-
-.overlay{display:none;position:absolute;inset:0;background:rgba(4,11,17,.94);z-index:20;padding:55px 120px}
-.overlay.active{display:block}
-.overlayPanel{height:100%;border:1px solid var(--line);border-radius:24px;padding:28px;background:linear-gradient(135deg,rgba(15,31,44,.98),rgba(6,14,22,.98))}
-.back{display:inline-block;margin-bottom:16px;color:#fff;text-decoration:none;font-weight:800}
-.overlay h2{font-size:42px;margin:4px 0 10px}.overlay p{font-size:17px;color:#d4dfe6}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
-.action{display:block;border:1px solid var(--line);border-radius:18px;padding:18px;text-decoration:none;color:white;background:rgba(10,22,33,.96)}
-.action h4{font-size:21px;margin:0 0 6px}.action p{font-size:13px;margin:0;color:#b7c5cf}
-.note{margin-top:14px;border:1px solid rgba(244,181,68,.25);background:rgba(244,181,68,.08);padding:13px 15px;border-radius:15px;color:#e8ddc7}
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  background:#00131c;
+  overflow:hidden;
+}
+body{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+#dashboard{
+  display:block;
+  width:100vw;
+  height:100vh;
+  object-fit:contain;
+  object-position:center;
+}
 </style>
 </head>
 <body>
-<div id="stage">
-  <div id="screen">
-    <div class="top"><div>iPad • Passenger Mode</div><div id="clock"></div></div>
-
-    <div class="hero">
-      <div class="heroLeft">
-        <div class="eyebrow">South Florida Passenger Experience</div>
-        <h1>Welcome!</h1>
-        <div class="sub">Enjoy your ride</div>
-        <div class="thanks">♥ Thank you for riding with me</div>
-        <div class="badges">
-          <div class="badge">📶 Wi‑Fi: <b id="wifi1">UberXL-Highlander</b></div>
-          <div class="badge">🌤️ Miami, FL</div>
-          <div class="badge">🚙 Highlander Hybrid 2022</div>
-        </div>
-      </div>
-      <div class="heroRight">
-        <img src="highlander_scene_v9.jpg" alt="Dark gray Highlander Hybrid in Miami">
-        <div class="carLabel"><b>HIGHLANDER</b><span>2022 HYBRID • DARK GRAY</span></div>
-      </div>
-    </div>
-
-    <div class="apps" id="apps"></div>
-
-    <div class="infoRow">
-      <div class="info"><div class="k">Free Wi‑Fi</div><div class="v">Network: <b id="wifi2">UberXL-Highlander</b><br>Password: <b id="pass">enjoytheride</b></div></div>
-      <div class="info"><div class="k">Today in Miami</div><div class="v">Tap Weather for local forecast.</div></div>
-      <div class="info"><div class="k">Flight Info</div><div class="v">Check status & updates.</div></div>
-      <div class="info"><div class="k">Local Guide</div><div class="v">Restaurants & attractions.</div></div>
-      <div class="info"><div class="k">Tips Appreciated!</div><div class="v">Tips are available in the <b>Uber or Lyft app</b>. Thank you!</div></div>
-    </div>
-
-    <div class="cards">
-      <div class="card real">
-        <h3>Moving to<br>South Florida?</h3>
-        <p>Ask me about homes & rentals!</p>
-        <a class="cta" href="#" onclick="openPanel('realestate');return false">REAL ESTATE SERVICES →</a>
-      </div>
-      <div class="card ride">
-        <h3>Need a ride<br>later?</h3>
-        <p>Airport • Long Distance • Hourly</p>
-        <p>Ask about my private transportation service.</p>
-        <a class="cta" href="#" onclick="openPanel('rides');return false">PRIVATE TRANSPORTATION →</a>
-      </div>
-      <div class="card driver">
-        <h3>Your Driver</h3>
-        <p>Professional • Local • Reliable</p>
-        <p>Thank you for riding!</p>
-        <a class="cta" href="#" onclick="openPanel('contact');return false">CONTACT / SAVE INFO →</a>
-      </div>
-    </div>
-    <div class="footer">♥ Please buckle up & enjoy your ride! ♥</div>
-  </div>
-
-  <div id="realestate" class="overlay">
-    <div class="overlayPanel">
-      <a class="back" href="#" onclick="closePanels();return false">← Back to Home</a>
-      <div class="eyebrow">Real Estate Services</div><h2>Moving to South Florida?</h2>
-      <p>Looking to buy or rent? Explore homes, rentals and neighborhoods across South Florida.</p>
-      <div class="actions">
-        <a class="action" id="homesLink"><h4>🏡 Homes for Sale</h4><p>Open the home search page.</p></a>
-        <a class="action" id="rentalsLink"><h4>🔑 Rentals</h4><p>Explore rental options.</p></a>
-        <a class="action" id="reText"><h4>💬 Text Me</h4><p>Send a message.</p></a>
-        <a class="action" id="reWhats"><h4>📲 WhatsApp</h4><p>Continue in WhatsApp.</p></a>
-      </div>
-    </div>
-  </div>
-
-  <div id="rides" class="overlay">
-    <div class="overlayPanel">
-      <a class="back" href="#" onclick="closePanels();return false">← Back to Home</a>
-      <div class="eyebrow">Private Transportation</div><h2>Need a ride later?</h2>
-      <p>Airport transportation, long-distance rides and hourly private-driver service, subject to availability.</p>
-      <div class="actions">
-        <a class="action" id="airportText"><h4>✈️ Airport Ride</h4><p>Request a future airport ride.</p></a>
-        <a class="action" id="longText"><h4>🚙 Long Distance</h4><p>Ask about longer private trips.</p></a>
-        <a class="action" id="hourlyText"><h4>🕐 Hourly Driver</h4><p>Ask about hourly availability.</p></a>
-        <a class="action" href="#" onclick="openPanel('contact');return false"><h4>👤 Save My Contact</h4><p>Keep the driver's information.</p></a>
-      </div>
-      <div class="note">Private transportation is separate from the current Uber/Lyft trip. Availability and pricing are confirmed directly.</div>
-    </div>
-  </div>
-
-  <div id="contact" class="overlay">
-    <div class="overlayPanel">
-      <a class="back" href="#" onclick="closePanels();return false">← Back to Home</a>
-      <div class="eyebrow">Your Driver</div><h2 id="driverName">Your Driver</h2>
-      <p>Professional • Local • Reliable</p>
-      <div class="actions">
-        <a class="action" id="contactText"><h4>💬 Text</h4><p>Send a message.</p></a>
-        <a class="action" id="contactCall"><h4>📞 Call</h4><p>Call the driver.</p></a>
-        <a class="action" id="contactWhats"><h4>📲 WhatsApp</h4><p>Open WhatsApp.</p></a>
-        <a class="action" id="contactCard"><h4>👤 Save Contact</h4><p>Download a contact card.</p></a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-const CONFIG={
- driverName:"Your Driver", phone:"+19540000000", whatsapp:"19540000000",
- realtorHomesUrl:"https://www.google.com/search?q=homes+for+sale+south+florida",
- realtorRentalsUrl:"https://www.google.com/search?q=rentals+south+florida",
- wifiName:"UberXL-Highlander", wifiPassword:"enjoytheride"
-};
-const APPS=[
- {n:"YouTube",s:"Videos",i:"▶️",u:"https://www.youtube.com/"},
- {n:"YouTube Kids",s:"For Kids",i:"🧒",u:"https://www.youtubekids.com/"},
- {n:"Spotify",s:"Music",i:"🎵",u:"https://open.spotify.com/"},
- {n:"Games",s:"Play",i:"🎮",u:"https://www.crazygames.com/"},
- {n:"PBS KIDS",s:"Educational",i:"🟢",u:"https://pbskids.org/games/"},
- {n:"Sudoku",s:"Brain Games",i:"🔢",u:"https://sudoku.com/"},
- {n:"Google Maps",s:"Explore",i:"📍",u:"https://maps.google.com/"},
- {n:"Weather",s:"Forecast",i:"🌤️",u:"https://weather.com/weather/today/l/Miami+FL"},
- {n:"FlightAware",s:"Flights",i:"✈️",u:"https://www.flightaware.com/"}
-];
-function fitStage(){
- const scale=Math.min(window.innerWidth/1366, window.innerHeight/768);
- const stage=document.getElementById("stage");
- stage.style.transform=`translate(-50%,-50%) scale(${scale})`;
-}
-window.addEventListener("resize",fitStage); window.addEventListener("orientationchange",()=>setTimeout(fitStage,200)); fitStage();
-
-function openPanel(id){closePanels();document.getElementById(id).classList.add("active")}
-function closePanels(){document.querySelectorAll(".overlay").forEach(x=>x.classList.remove("active"))}
-function sms(t){return `sms:${CONFIG.phone}?&body=${encodeURIComponent(t)}`}
-function wa(t){return `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(t)}`}
-
-document.getElementById("apps").innerHTML=APPS.map(a=>`<a class="app" href="${a.u}" target="_blank" rel="noopener"><div class="ico">${a.i}</div><b>${a.n}</b><small>${a.s}</small></a>`).join("");
-["wifi1","wifi2"].forEach(id=>document.getElementById(id).textContent=CONFIG.wifiName);
-document.getElementById("pass").textContent=CONFIG.wifiPassword;
-document.getElementById("driverName").textContent=CONFIG.driverName;
-document.getElementById("homesLink").href=CONFIG.realtorHomesUrl;
-document.getElementById("rentalsLink").href=CONFIG.realtorRentalsUrl;
-document.getElementById("reText").href=sms("Hi! I saw your South Florida real-estate information during my ride. I’m interested in buying or renting.");
-document.getElementById("reWhats").href=wa("Hi! I saw your South Florida real-estate information during my ride. I’m interested in buying or renting.");
-document.getElementById("airportText").href=sms("Hi! I’d like to ask about a future private airport ride.");
-document.getElementById("longText").href=sms("Hi! I’d like to ask about a private long-distance ride.");
-document.getElementById("hourlyText").href=sms("Hi! I’d like to ask about hourly private transportation.");
-document.getElementById("contactText").href=sms("Hi! I saved your information from my ride.");
-document.getElementById("contactCall").href=`tel:${CONFIG.phone}`;
-document.getElementById("contactWhats").href=wa("Hi! I saved your information from my ride.");
-const vcard=`BEGIN:VCARD
-VERSION:3.0
-FN:${CONFIG.driverName}
-TEL;TYPE=CELL:${CONFIG.phone}
-END:VCARD`;
-document.getElementById("contactCard").href="data:text/vcard;charset=utf-8,"+encodeURIComponent(vcard);
-document.getElementById("contactCard").download="driver-contact.vcf";
-
-function tick(){document.getElementById("clock").textContent=new Date().toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})}
-tick(); setInterval(tick,30000);
-</script>
+<img id="dashboard" src="dashboard.png" alt="Highlander Passenger Portal">
 </body>
 </html>
